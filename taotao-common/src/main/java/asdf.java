@@ -1,2 +1,2 @@
-public class asdf {
+public class asdf {asdf
 }
