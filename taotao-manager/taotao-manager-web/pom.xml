@@ -11,6 +11,12 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 	  <artifactId>taotao-manager-web</artifactId>
 	  <packaging>war</packaging>
     <dependencies>
+        <!--依赖service包-->
+        <dependency>
+            <groupId>com.taotao</groupId>
+            <artifactId>taotao-manager-service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
             <!-- 时间操作组件 -->
             <dependency>
                 <groupId>joda-time</groupId>

@@ -1,0 +1,1020 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taotao.mapper.TbOrderItemMapper">
+  <resultMap id="BaseResultMap" type="controller.taotao.pojo.TbOrderItem">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="ITEM_ID" jdbcType="VARCHAR" property="itemId" />
+    <result column="ORDER_ID" jdbcType="VARCHAR" property="orderId" />
+    <result column="NUM" jdbcType="VARCHAR" property="num" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="PRICE" jdbcType="VARCHAR" property="price" />
+    <result column="TOTAL_FEE" jdbcType="VARCHAR" property="totalFee" />
+    <result column="PIC_PATH" jdbcType="VARCHAR" property="picPath" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, ITEM_ID, ORDER_ID, NUM, TITLE, PRICE, TOTAL_FEE, PIC_PATH
+  </sql>
+  <select id="selectByExample" parameterType="controller.taotao.pojo.TbOrderItemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_order_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_order_item
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_order_item
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="controller.taotao.pojo.TbOrderItemExample">
+    delete from tb_order_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="controller.taotao.pojo.TbOrderItem">
+    insert into tb_order_item (ID, ITEM_ID, ORDER_ID, 
+      NUM, TITLE, PRICE, 
+      TOTAL_FEE, PIC_PATH)
+    values (#{id,jdbcType=VARCHAR}, #{itemId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, 
+      #{num,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
+      #{totalFee,jdbcType=VARCHAR}, #{picPath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="controller.taotao.pojo.TbOrderItem">
+    insert into tb_order_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="itemId != null">
+        ITEM_ID,
+      </if>
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="num != null">
+        NUM,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="totalFee != null">
+        TOTAL_FEE,
+      </if>
+      <if test="picPath != null">
+        PIC_PATH,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null">
+        #{totalFee,jdbcType=VARCHAR},
+      </if>
+      <if test="picPath != null">
+        #{picPath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="controller.taotao.pojo.TbOrderItemExample" resultType="java.lang.Integer">
+    select count(*) from tb_order_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_order_item
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemId != null">
+        ITEM_ID = #{record.itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderId != null">
+        ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.num != null">
+        NUM = #{record.num,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        PRICE = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalFee != null">
+        TOTAL_FEE = #{record.totalFee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picPath != null">
+        PIC_PATH = #{record.picPath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_order_item
+    set ID = #{record.id,jdbcType=VARCHAR},
+      ITEM_ID = #{record.itemId,jdbcType=VARCHAR},
+      ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      NUM = #{record.num,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      PRICE = #{record.price,jdbcType=VARCHAR},
+      TOTAL_FEE = #{record.totalFee,jdbcType=VARCHAR},
+      PIC_PATH = #{record.picPath,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="controller.taotao.pojo.TbOrderItem">
+    update tb_order_item
+    <set>
+      <if test="itemId != null">
+        ITEM_ID = #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        NUM = #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        PRICE = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null">
+        TOTAL_FEE = #{totalFee,jdbcType=VARCHAR},
+      </if>
+      <if test="picPath != null">
+        PIC_PATH = #{picPath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="controller.taotao.pojo.TbOrderItem">
+    update tb_order_item
+    set ITEM_ID = #{itemId,jdbcType=VARCHAR},
+      ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      NUM = #{num,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=VARCHAR},
+      TOTAL_FEE = #{totalFee,jdbcType=VARCHAR},
+      PIC_PATH = #{picPath,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="controller.taotao.pojo.TbOrderItem">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="ITEM_ID" jdbcType="VARCHAR" property="itemId" />
+    <result column="ORDER_ID" jdbcType="VARCHAR" property="orderId" />
+    <result column="NUM" jdbcType="VARCHAR" property="num" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="PRICE" jdbcType="VARCHAR" property="price" />
+    <result column="TOTAL_FEE" jdbcType="VARCHAR" property="totalFee" />
+    <result column="PIC_PATH" jdbcType="VARCHAR" property="picPath" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, ITEM_ID, ORDER_ID, NUM, TITLE, PRICE, TOTAL_FEE, PIC_PATH
+  </sql>
+  <select id="selectByExample" parameterType="controller.taotao.pojo.TbOrderItemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_order_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_order_item
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_order_item
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="controller.taotao.pojo.TbOrderItemExample">
+    delete from tb_order_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="controller.taotao.pojo.TbOrderItem">
+    insert into tb_order_item (ID, ITEM_ID, ORDER_ID, 
+      NUM, TITLE, PRICE, 
+      TOTAL_FEE, PIC_PATH)
+    values (#{id,jdbcType=VARCHAR}, #{itemId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, 
+      #{num,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
+      #{totalFee,jdbcType=VARCHAR}, #{picPath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="controller.taotao.pojo.TbOrderItem">
+    insert into tb_order_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="itemId != null">
+        ITEM_ID,
+      </if>
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="num != null">
+        NUM,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="totalFee != null">
+        TOTAL_FEE,
+      </if>
+      <if test="picPath != null">
+        PIC_PATH,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null">
+        #{totalFee,jdbcType=VARCHAR},
+      </if>
+      <if test="picPath != null">
+        #{picPath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="controller.taotao.pojo.TbOrderItemExample" resultType="java.lang.Integer">
+    select count(*) from tb_order_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_order_item
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemId != null">
+        ITEM_ID = #{record.itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderId != null">
+        ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.num != null">
+        NUM = #{record.num,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        PRICE = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalFee != null">
+        TOTAL_FEE = #{record.totalFee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picPath != null">
+        PIC_PATH = #{record.picPath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_order_item
+    set ID = #{record.id,jdbcType=VARCHAR},
+      ITEM_ID = #{record.itemId,jdbcType=VARCHAR},
+      ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      NUM = #{record.num,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      PRICE = #{record.price,jdbcType=VARCHAR},
+      TOTAL_FEE = #{record.totalFee,jdbcType=VARCHAR},
+      PIC_PATH = #{record.picPath,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="controller.taotao.pojo.TbOrderItem">
+    update tb_order_item
+    <set>
+      <if test="itemId != null">
+        ITEM_ID = #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        NUM = #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        PRICE = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null">
+        TOTAL_FEE = #{totalFee,jdbcType=VARCHAR},
+      </if>
+      <if test="picPath != null">
+        PIC_PATH = #{picPath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="controller.taotao.pojo.TbOrderItem">
+    update tb_order_item
+    set ITEM_ID = #{itemId,jdbcType=VARCHAR},
+      ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      NUM = #{num,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=VARCHAR},
+      TOTAL_FEE = #{totalFee,jdbcType=VARCHAR},
+      PIC_PATH = #{picPath,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="controller.taotao.pojo.TbOrderItem">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="ITEM_ID" jdbcType="VARCHAR" property="itemId" />
+    <result column="ORDER_ID" jdbcType="VARCHAR" property="orderId" />
+    <result column="NUM" jdbcType="VARCHAR" property="num" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="PRICE" jdbcType="VARCHAR" property="price" />
+    <result column="TOTAL_FEE" jdbcType="VARCHAR" property="totalFee" />
+    <result column="PIC_PATH" jdbcType="VARCHAR" property="picPath" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, ITEM_ID, ORDER_ID, NUM, TITLE, PRICE, TOTAL_FEE, PIC_PATH
+  </sql>
+  <select id="selectByExample" parameterType="controller.taotao.pojo.TbOrderItemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_order_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_order_item
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_order_item
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="controller.taotao.pojo.TbOrderItemExample">
+    delete from tb_order_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="controller.taotao.pojo.TbOrderItem">
+    insert into tb_order_item (ID, ITEM_ID, ORDER_ID, 
+      NUM, TITLE, PRICE, 
+      TOTAL_FEE, PIC_PATH)
+    values (#{id,jdbcType=VARCHAR}, #{itemId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, 
+      #{num,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
+      #{totalFee,jdbcType=VARCHAR}, #{picPath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="controller.taotao.pojo.TbOrderItem">
+    insert into tb_order_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="itemId != null">
+        ITEM_ID,
+      </if>
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="num != null">
+        NUM,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="totalFee != null">
+        TOTAL_FEE,
+      </if>
+      <if test="picPath != null">
+        PIC_PATH,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null">
+        #{totalFee,jdbcType=VARCHAR},
+      </if>
+      <if test="picPath != null">
+        #{picPath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="controller.taotao.pojo.TbOrderItemExample" resultType="java.lang.Integer">
+    select count(*) from tb_order_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_order_item
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemId != null">
+        ITEM_ID = #{record.itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderId != null">
+        ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.num != null">
+        NUM = #{record.num,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        PRICE = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalFee != null">
+        TOTAL_FEE = #{record.totalFee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picPath != null">
+        PIC_PATH = #{record.picPath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_order_item
+    set ID = #{record.id,jdbcType=VARCHAR},
+      ITEM_ID = #{record.itemId,jdbcType=VARCHAR},
+      ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      NUM = #{record.num,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      PRICE = #{record.price,jdbcType=VARCHAR},
+      TOTAL_FEE = #{record.totalFee,jdbcType=VARCHAR},
+      PIC_PATH = #{record.picPath,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="controller.taotao.pojo.TbOrderItem">
+    update tb_order_item
+    <set>
+      <if test="itemId != null">
+        ITEM_ID = #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        NUM = #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        PRICE = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null">
+        TOTAL_FEE = #{totalFee,jdbcType=VARCHAR},
+      </if>
+      <if test="picPath != null">
+        PIC_PATH = #{picPath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="controller.taotao.pojo.TbOrderItem">
+    update tb_order_item
+    set ITEM_ID = #{itemId,jdbcType=VARCHAR},
+      ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      NUM = #{num,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=VARCHAR},
+      TOTAL_FEE = #{totalFee,jdbcType=VARCHAR},
+      PIC_PATH = #{picPath,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="controller.taotao.pojo.TbOrderItem">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="ITEM_ID" jdbcType="VARCHAR" property="itemId" />
+    <result column="ORDER_ID" jdbcType="VARCHAR" property="orderId" />
+    <result column="NUM" jdbcType="VARCHAR" property="num" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="PRICE" jdbcType="VARCHAR" property="price" />
+    <result column="TOTAL_FEE" jdbcType="VARCHAR" property="totalFee" />
+    <result column="PIC_PATH" jdbcType="VARCHAR" property="picPath" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, ITEM_ID, ORDER_ID, NUM, TITLE, PRICE, TOTAL_FEE, PIC_PATH
+  </sql>
+  <select id="selectByExample" parameterType="controller.taotao.pojo.TbOrderItemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_order_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_order_item
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_order_item
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="controller.taotao.pojo.TbOrderItemExample">
+    delete from tb_order_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="controller.taotao.pojo.TbOrderItem">
+    insert into tb_order_item (ID, ITEM_ID, ORDER_ID, 
+      NUM, TITLE, PRICE, 
+      TOTAL_FEE, PIC_PATH)
+    values (#{id,jdbcType=VARCHAR}, #{itemId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, 
+      #{num,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
+      #{totalFee,jdbcType=VARCHAR}, #{picPath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="controller.taotao.pojo.TbOrderItem">
+    insert into tb_order_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="itemId != null">
+        ITEM_ID,
+      </if>
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="num != null">
+        NUM,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="totalFee != null">
+        TOTAL_FEE,
+      </if>
+      <if test="picPath != null">
+        PIC_PATH,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null">
+        #{totalFee,jdbcType=VARCHAR},
+      </if>
+      <if test="picPath != null">
+        #{picPath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="controller.taotao.pojo.TbOrderItemExample" resultType="java.lang.Integer">
+    select count(*) from tb_order_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_order_item
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemId != null">
+        ITEM_ID = #{record.itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderId != null">
+        ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.num != null">
+        NUM = #{record.num,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        PRICE = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalFee != null">
+        TOTAL_FEE = #{record.totalFee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picPath != null">
+        PIC_PATH = #{record.picPath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_order_item
+    set ID = #{record.id,jdbcType=VARCHAR},
+      ITEM_ID = #{record.itemId,jdbcType=VARCHAR},
+      ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      NUM = #{record.num,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      PRICE = #{record.price,jdbcType=VARCHAR},
+      TOTAL_FEE = #{record.totalFee,jdbcType=VARCHAR},
+      PIC_PATH = #{record.picPath,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="controller.taotao.pojo.TbOrderItem">
+    update tb_order_item
+    <set>
+      <if test="itemId != null">
+        ITEM_ID = #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        NUM = #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        PRICE = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null">
+        TOTAL_FEE = #{totalFee,jdbcType=VARCHAR},
+      </if>
+      <if test="picPath != null">
+        PIC_PATH = #{picPath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="controller.taotao.pojo.TbOrderItem">
+    update tb_order_item
+    set ITEM_ID = #{itemId,jdbcType=VARCHAR},
+      ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      NUM = #{num,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=VARCHAR},
+      TOTAL_FEE = #{totalFee,jdbcType=VARCHAR},
+      PIC_PATH = #{picPath,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

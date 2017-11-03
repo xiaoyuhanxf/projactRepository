@@ -10,5 +10,5 @@
 
     <!-- 包扫描器，扫描带@Service注解的类 -->
     <context:component-scan base-package="com.taotao.service"></context:component-scan>
-    
+
 </beans>

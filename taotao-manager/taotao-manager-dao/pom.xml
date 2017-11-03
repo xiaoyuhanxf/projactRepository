@@ -6,7 +6,6 @@
 		<artifactId>taotao-manager</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
 	<artifactId>taotao-manager-dao</artifactId>
 	
 	<!-- 添加依赖 -->

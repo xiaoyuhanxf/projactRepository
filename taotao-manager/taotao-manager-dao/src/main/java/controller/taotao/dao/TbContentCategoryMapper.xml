@@ -1,0 +1,1020 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taotao.mapper.TbContentCategoryMapper">
+  <resultMap id="BaseResultMap" type="controller.taotao.pojo.TbContentCategory">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="SORT_ORDER" jdbcType="VARCHAR" property="sortOrder" />
+    <result column="IS_PARENT" jdbcType="VARCHAR" property="isParent" />
+    <result column="CREATED" jdbcType="TIMESTAMP" property="created" />
+    <result column="UPDATED" jdbcType="TIMESTAMP" property="updated" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, PARENT_ID, NAME, STATUS, SORT_ORDER, IS_PARENT, CREATED, UPDATED
+  </sql>
+  <select id="selectByExample" parameterType="controller.taotao.pojo.TbContentCategoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_content_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_content_category
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_content_category
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="controller.taotao.pojo.TbContentCategoryExample">
+    delete from tb_content_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="controller.taotao.pojo.TbContentCategory">
+    insert into tb_content_category (ID, PARENT_ID, NAME, 
+      STATUS, SORT_ORDER, IS_PARENT, 
+      CREATED, UPDATED)
+    values (#{id,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{sortOrder,jdbcType=VARCHAR}, #{isParent,jdbcType=VARCHAR}, 
+      #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="controller.taotao.pojo.TbContentCategory">
+    insert into tb_content_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="sortOrder != null">
+        SORT_ORDER,
+      </if>
+      <if test="isParent != null">
+        IS_PARENT,
+      </if>
+      <if test="created != null">
+        CREATED,
+      </if>
+      <if test="updated != null">
+        UPDATED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="sortOrder != null">
+        #{sortOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="isParent != null">
+        #{isParent,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="controller.taotao.pojo.TbContentCategoryExample" resultType="java.lang.Integer">
+    select count(*) from tb_content_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_content_category
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null">
+        PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortOrder != null">
+        SORT_ORDER = #{record.sortOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isParent != null">
+        IS_PARENT = #{record.isParent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.created != null">
+        CREATED = #{record.created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updated != null">
+        UPDATED = #{record.updated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_content_category
+    set ID = #{record.id,jdbcType=VARCHAR},
+      PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      SORT_ORDER = #{record.sortOrder,jdbcType=VARCHAR},
+      IS_PARENT = #{record.isParent,jdbcType=VARCHAR},
+      CREATED = #{record.created,jdbcType=TIMESTAMP},
+      UPDATED = #{record.updated,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="controller.taotao.pojo.TbContentCategory">
+    update tb_content_category
+    <set>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="sortOrder != null">
+        SORT_ORDER = #{sortOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="isParent != null">
+        IS_PARENT = #{isParent,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        CREATED = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        UPDATED = #{updated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="controller.taotao.pojo.TbContentCategory">
+    update tb_content_category
+    set PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      SORT_ORDER = #{sortOrder,jdbcType=VARCHAR},
+      IS_PARENT = #{isParent,jdbcType=VARCHAR},
+      CREATED = #{created,jdbcType=TIMESTAMP},
+      UPDATED = #{updated,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="controller.taotao.pojo.TbContentCategory">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="SORT_ORDER" jdbcType="VARCHAR" property="sortOrder" />
+    <result column="IS_PARENT" jdbcType="VARCHAR" property="isParent" />
+    <result column="CREATED" jdbcType="TIMESTAMP" property="created" />
+    <result column="UPDATED" jdbcType="TIMESTAMP" property="updated" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, PARENT_ID, NAME, STATUS, SORT_ORDER, IS_PARENT, CREATED, UPDATED
+  </sql>
+  <select id="selectByExample" parameterType="controller.taotao.pojo.TbContentCategoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_content_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_content_category
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_content_category
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="controller.taotao.pojo.TbContentCategoryExample">
+    delete from tb_content_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="controller.taotao.pojo.TbContentCategory">
+    insert into tb_content_category (ID, PARENT_ID, NAME, 
+      STATUS, SORT_ORDER, IS_PARENT, 
+      CREATED, UPDATED)
+    values (#{id,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{sortOrder,jdbcType=VARCHAR}, #{isParent,jdbcType=VARCHAR}, 
+      #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="controller.taotao.pojo.TbContentCategory">
+    insert into tb_content_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="sortOrder != null">
+        SORT_ORDER,
+      </if>
+      <if test="isParent != null">
+        IS_PARENT,
+      </if>
+      <if test="created != null">
+        CREATED,
+      </if>
+      <if test="updated != null">
+        UPDATED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="sortOrder != null">
+        #{sortOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="isParent != null">
+        #{isParent,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="controller.taotao.pojo.TbContentCategoryExample" resultType="java.lang.Integer">
+    select count(*) from tb_content_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_content_category
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null">
+        PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortOrder != null">
+        SORT_ORDER = #{record.sortOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isParent != null">
+        IS_PARENT = #{record.isParent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.created != null">
+        CREATED = #{record.created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updated != null">
+        UPDATED = #{record.updated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_content_category
+    set ID = #{record.id,jdbcType=VARCHAR},
+      PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      SORT_ORDER = #{record.sortOrder,jdbcType=VARCHAR},
+      IS_PARENT = #{record.isParent,jdbcType=VARCHAR},
+      CREATED = #{record.created,jdbcType=TIMESTAMP},
+      UPDATED = #{record.updated,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="controller.taotao.pojo.TbContentCategory">
+    update tb_content_category
+    <set>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="sortOrder != null">
+        SORT_ORDER = #{sortOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="isParent != null">
+        IS_PARENT = #{isParent,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        CREATED = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        UPDATED = #{updated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="controller.taotao.pojo.TbContentCategory">
+    update tb_content_category
+    set PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      SORT_ORDER = #{sortOrder,jdbcType=VARCHAR},
+      IS_PARENT = #{isParent,jdbcType=VARCHAR},
+      CREATED = #{created,jdbcType=TIMESTAMP},
+      UPDATED = #{updated,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="controller.taotao.pojo.TbContentCategory">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="SORT_ORDER" jdbcType="VARCHAR" property="sortOrder" />
+    <result column="IS_PARENT" jdbcType="VARCHAR" property="isParent" />
+    <result column="CREATED" jdbcType="TIMESTAMP" property="created" />
+    <result column="UPDATED" jdbcType="TIMESTAMP" property="updated" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, PARENT_ID, NAME, STATUS, SORT_ORDER, IS_PARENT, CREATED, UPDATED
+  </sql>
+  <select id="selectByExample" parameterType="controller.taotao.pojo.TbContentCategoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_content_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_content_category
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_content_category
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="controller.taotao.pojo.TbContentCategoryExample">
+    delete from tb_content_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="controller.taotao.pojo.TbContentCategory">
+    insert into tb_content_category (ID, PARENT_ID, NAME, 
+      STATUS, SORT_ORDER, IS_PARENT, 
+      CREATED, UPDATED)
+    values (#{id,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{sortOrder,jdbcType=VARCHAR}, #{isParent,jdbcType=VARCHAR}, 
+      #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="controller.taotao.pojo.TbContentCategory">
+    insert into tb_content_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="sortOrder != null">
+        SORT_ORDER,
+      </if>
+      <if test="isParent != null">
+        IS_PARENT,
+      </if>
+      <if test="created != null">
+        CREATED,
+      </if>
+      <if test="updated != null">
+        UPDATED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="sortOrder != null">
+        #{sortOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="isParent != null">
+        #{isParent,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="controller.taotao.pojo.TbContentCategoryExample" resultType="java.lang.Integer">
+    select count(*) from tb_content_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_content_category
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null">
+        PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortOrder != null">
+        SORT_ORDER = #{record.sortOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isParent != null">
+        IS_PARENT = #{record.isParent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.created != null">
+        CREATED = #{record.created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updated != null">
+        UPDATED = #{record.updated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_content_category
+    set ID = #{record.id,jdbcType=VARCHAR},
+      PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      SORT_ORDER = #{record.sortOrder,jdbcType=VARCHAR},
+      IS_PARENT = #{record.isParent,jdbcType=VARCHAR},
+      CREATED = #{record.created,jdbcType=TIMESTAMP},
+      UPDATED = #{record.updated,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="controller.taotao.pojo.TbContentCategory">
+    update tb_content_category
+    <set>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="sortOrder != null">
+        SORT_ORDER = #{sortOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="isParent != null">
+        IS_PARENT = #{isParent,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        CREATED = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        UPDATED = #{updated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="controller.taotao.pojo.TbContentCategory">
+    update tb_content_category
+    set PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      SORT_ORDER = #{sortOrder,jdbcType=VARCHAR},
+      IS_PARENT = #{isParent,jdbcType=VARCHAR},
+      CREATED = #{created,jdbcType=TIMESTAMP},
+      UPDATED = #{updated,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="controller.taotao.pojo.TbContentCategory">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="SORT_ORDER" jdbcType="VARCHAR" property="sortOrder" />
+    <result column="IS_PARENT" jdbcType="VARCHAR" property="isParent" />
+    <result column="CREATED" jdbcType="TIMESTAMP" property="created" />
+    <result column="UPDATED" jdbcType="TIMESTAMP" property="updated" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, PARENT_ID, NAME, STATUS, SORT_ORDER, IS_PARENT, CREATED, UPDATED
+  </sql>
+  <select id="selectByExample" parameterType="controller.taotao.pojo.TbContentCategoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_content_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_content_category
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_content_category
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="controller.taotao.pojo.TbContentCategoryExample">
+    delete from tb_content_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="controller.taotao.pojo.TbContentCategory">
+    insert into tb_content_category (ID, PARENT_ID, NAME, 
+      STATUS, SORT_ORDER, IS_PARENT, 
+      CREATED, UPDATED)
+    values (#{id,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{sortOrder,jdbcType=VARCHAR}, #{isParent,jdbcType=VARCHAR}, 
+      #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="controller.taotao.pojo.TbContentCategory">
+    insert into tb_content_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="sortOrder != null">
+        SORT_ORDER,
+      </if>
+      <if test="isParent != null">
+        IS_PARENT,
+      </if>
+      <if test="created != null">
+        CREATED,
+      </if>
+      <if test="updated != null">
+        UPDATED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="sortOrder != null">
+        #{sortOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="isParent != null">
+        #{isParent,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="controller.taotao.pojo.TbContentCategoryExample" resultType="java.lang.Integer">
+    select count(*) from tb_content_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_content_category
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null">
+        PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortOrder != null">
+        SORT_ORDER = #{record.sortOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isParent != null">
+        IS_PARENT = #{record.isParent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.created != null">
+        CREATED = #{record.created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updated != null">
+        UPDATED = #{record.updated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_content_category
+    set ID = #{record.id,jdbcType=VARCHAR},
+      PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      SORT_ORDER = #{record.sortOrder,jdbcType=VARCHAR},
+      IS_PARENT = #{record.isParent,jdbcType=VARCHAR},
+      CREATED = #{record.created,jdbcType=TIMESTAMP},
+      UPDATED = #{record.updated,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="controller.taotao.pojo.TbContentCategory">
+    update tb_content_category
+    <set>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="sortOrder != null">
+        SORT_ORDER = #{sortOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="isParent != null">
+        IS_PARENT = #{isParent,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        CREATED = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        UPDATED = #{updated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="controller.taotao.pojo.TbContentCategory">
+    update tb_content_category
+    set PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      SORT_ORDER = #{sortOrder,jdbcType=VARCHAR},
+      IS_PARENT = #{isParent,jdbcType=VARCHAR},
+      CREATED = #{created,jdbcType=TIMESTAMP},
+      UPDATED = #{updated,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
